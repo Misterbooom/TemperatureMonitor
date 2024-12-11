@@ -1,16 +1,19 @@
 import React from 'react'
 import { DescriptionContainer } from './DescriptionContainer'
+import { RefreshButton } from './RefreshButton'
 
 interface TemperatureProps {
 	temperature: number
 	humidity: number
 	lastTimeMeasured: string
+	onRefreshClick: () => void
 }
 
 const TemperatureContainer: React.FC<TemperatureProps> = ({
 	temperature,
 	humidity,
 	lastTimeMeasured,
+	onRefreshClick
 }) => {
 	const getAirQualityEmoji = (
 		temperature: number,
@@ -67,12 +70,15 @@ const TemperatureContainer: React.FC<TemperatureProps> = ({
 		}
 	}
 
-	const airQualityIcon = getAirQualityEmoji(temperature, humidity);
-	const footerText = getAdvice(temperature,humidity);
+	const airQualityIcon = getAirQualityEmoji(temperature, humidity)
+	const footerText = getAdvice(temperature, humidity)
 
 	return (
 		<div className='temperature-container'>
-			<h2 className='title'>Room Monitoring</h2>
+			<div className='header'>
+				<h2 className='title'>Room Monitoring</h2>
+				<RefreshButton onClick={onRefreshClick} />
+			</div>
 			<h1 className='temperature'>{temperature}°C</h1>
 			<div className='divider'></div>
 			<DescriptionContainer

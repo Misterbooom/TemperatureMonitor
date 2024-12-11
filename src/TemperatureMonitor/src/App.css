@@ -142,5 +142,50 @@
 	font-size: 30px;
 	white-space: nowrap;
 	color: #006eff;
+}
+.refresh-button {
+	background-color: #b486fa;
+	width: 40px;
+	height: 40px;
 
+	border: none;
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+	transition: all 0.3s ease;
+	position: absolute;
+	top: 15px;
+	right: 15px;
+}
+
+
+.refresh-button i {
+	color: white;
+	font-size: 18px;
+}
+
+
+.refresh-button:hover {
+	background-color: #4d5fff;
+	box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+.refresh-button:focus i{
+	background-color: #4671ff;
+	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+	transform: translateY(2px);
+  	animation: rotate-icon 0.5s linear forwards;
+}
+
+@keyframes rotate-icon {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

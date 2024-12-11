@@ -12,8 +12,9 @@ interface Data {
 
 const App: React.FC = () => {
 	const [data, setData] = useState<Data | null>(null)
+	const [refreshKey, setRefreshKey] = useState(0) // Added state to trigger refresh
 
-	useEffect(() => {
+	const fetchData = () => {
 		axios
 			.get('http://127.0.0.1:5000/get_temperature')
 			.then(response => {
@@ -22,19 +23,28 @@ const App: React.FC = () => {
 			.catch(error => {
 				console.error('Error fetching temperature data:', error)
 			})
-	}, [])
+	}
+
+	useEffect(() => {
+		fetchData()
+	}, [refreshKey])
+
+	const handleRefreshClick = () => {
+		setRefreshKey(prevKey => prevKey + 1) 
+	}
 
 	if (!data) {
 		console.error('invalid data - ', data)
 		return <p>Loading...</p>
 	}
-	console.log(data);
+
 	return (
 		<div className='App'>
 			<TemperatureContainer
 				temperature={data.temperature}
 				lastTimeMeasured={data.lastTimeMeasured}
 				humidity={data.humidity}
+				onRefreshClick={handleRefreshClick} 
 			/>
 		</div>
 	)
